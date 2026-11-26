@@ -88,4 +88,12 @@
     <loc>https://newvenusclinic.com/medical-disclaimer.html</loc>
     <priority>0.3</priority>
   </url>
+  <url><loc>https://newvenusclinic.com/blog-archive.html</loc></url>
+  <url><loc>https://newvenusclinic.com/blog-author.html</loc></url>
+  <url><loc>https://newvenusclinic.com/wpbc-booking.html</loc></url>
+  <url><loc>https://newvenusclinic.com/wpbc-booking-received.html</loc></url>
+  <url><loc>https://newvenusclinic.com/contact-form.html</loc></url>
+  <url><loc>https://newvenusclinic.com/appointment-request.html</loc></url>
+  <url><loc>https://newvenusclinic.com/appointment-form.html</loc></url>
+  <url><loc>https://newvenusclinic.com/demo.html</loc></url>
 </urlset>

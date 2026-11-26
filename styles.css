@@ -474,6 +474,11 @@ textarea {
   transform: rotate(180deg);
 }
 
+.nav-item.dropdown:hover > .dropdown-toggle::after,
+.nav-item.dropdown:focus-within > .dropdown-toggle::after {
+  width: 100%;
+}
+
 .nav-link.active {
   color: #00b39e;
   color: var(--teal-accent);
@@ -488,7 +493,7 @@ textarea {
   height: 2px;
   background-color: var(--primary);
   height: 2.5px;
-  background: linear-gradient(90deg, var(--primary), var(--teal-accent));
+  background-color: var(--teal-accent);
   border-radius: var(--radius-full);
   transition: var(--transition);
 }
@@ -513,16 +518,13 @@ textarea {
   border: 1px solid var(--border-light);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transform: translateY(12px);
-  transition: var(--transition);
+  transition: opacity 0.15s ease;
   z-index: 1100;
 }
 
 .dropdown:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
 }
 
 .dropdown-link {
@@ -536,6 +538,12 @@ textarea {
   font-size: 0.92rem;
   border-radius: var(--radius-full);
   transition: var(--transition);
+}
+
+.dropdown-link:hover,
+.dropdown-link:focus-visible {
+  background-color: #e7f7f5;
+  color: var(--navy-deep);
 }
 
 .dropdown-link small {
@@ -631,7 +639,6 @@ textarea {
 .nav-item.dropdown:focus-within .dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
 }
 
 .nav-item.dropdown:focus-within .chevron {
@@ -7313,4 +7320,219 @@ button.articles-page-btn[style*="display: none"] {
   a {
     text-decoration: underline;
   }
+}
+
+/* Migrated clinic content and contact forms. */
+.migration-profile {
+  display: grid;
+  grid-template-columns: minmax(14rem, 2fr) minmax(0, 3fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.migration-profile img,
+.archive-post img,
+.demo-section img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.migration-profile h2,
+.migration-profile p,
+.migration-profile ul,
+.migration-credentials,
+.migration-profile .btn {
+  margin-block: 0.75rem;
+}
+
+.migration-profile ul,
+.migration-profile-lists ul {
+  list-style: disc;
+  padding-inline-start: 1.25rem;
+}
+
+.migration-profile-lists,
+.demo-products,
+.demo-gallery {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.migration-profile-lists {
+  margin-top: 2.25rem;
+}
+
+.migration-profile-lists > div {
+  background: #f2f9fd;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.migration-card {
+  max-width: min(52rem, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.archive-post + .archive-post {
+  border-top: 1px solid #d9e7ef;
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.archive-post h2 {
+  margin-block: 0.75rem;
+}
+
+.archive-post img {
+  max-width: 39rem;
+}
+
+.doctors-links-section {
+  padding-bottom: 2rem;
+}
+
+.demo-hero,
+.demo-section {
+  padding-block: clamp(1.75rem, 5vw, 4rem);
+}
+
+.demo-hero {
+  background: #f2f9fd;
+}
+
+.demo-section h2 {
+  margin-bottom: 1rem;
+}
+
+.demo-section > img {
+  max-width: 46rem;
+}
+
+.contact-map-section iframe {
+  display: block;
+  width: 100%;
+  height: clamp(18rem, 42vw, 31rem);
+  border: 0;
+}
+
+.clinic-form {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.clinic-form label {
+  font-weight: 600;
+}
+
+.clinic-form input,
+.clinic-form select,
+.clinic-form textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #a9bfce;
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #12153f;
+  font: inherit;
+}
+
+.clinic-form input:focus,
+.clinic-form select:focus,
+.clinic-form textarea:focus {
+  outline: 2px solid #125d92;
+  outline-offset: 2px;
+}
+
+.clinic-form-note {
+  font-size: 0.875rem;
+  margin-block: 0.4rem;
+}
+
+.clinic-form button {
+  justify-self: start;
+}
+
+.clinic-form button:disabled,
+.articles-page-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.clinic-whatsapp {
+  position: relative;
+  color: #12153f;
+}
+
+.floating-actions-wrap > .back-to-top {
+  align-self: flex-end;
+}
+
+.clinic-whatsapp > summary {
+  width: max-content;
+  margin-left: auto;
+  padding: 0.7rem 1rem;
+  background: #126747;
+  color: #fff;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 0.25rem 1rem #12153f33;
+}
+
+.clinic-whatsapp-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.55rem);
+  width: min(23rem, calc(100vw - 2rem));
+  max-height: min(39rem, calc(100dvh - 5.2rem));
+  overflow-y: auto;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #c6dce7;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.6rem 2rem #12153f33;
+}
+
+.article-existing-comment {
+  margin-block: 1.5rem;
+}
+
+@media (max-width: 42rem) {
+  .migration-profile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Shared link feedback. Keep the underline visible against each section's text color. */
+a[href]:where(:hover, :focus-visible) {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--teal-accent);
+  text-decoration: none;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+a:is(.btn, .social-icon, .footer-social-circle, .articles-page-btn, .hero-video-play, .back-to-top, .floating-whatsapp):is(:hover, :focus-visible) {
+  text-decoration: none;
+  filter: brightness(0.9);
+  box-shadow: 0 0 0 3px rgb(0 179 158 / 32%);
+}
+
+a:is(.brand-logo, .footer-logo-wrap, .doctor-card, .article-image > a, .archive-post > a:first-child):is(:hover, :focus-visible) {
+  outline: 2px solid var(--teal-accent);
+  outline-offset: 3px;
 }

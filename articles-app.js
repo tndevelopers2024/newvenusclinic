@@ -19,8 +19,8 @@ const BLOG_POSTS = [
     width: 768,
     height: 286,
     alt: "News clipping: 76-year-old gets infected stent removed from heart at Apollo Hospitals OMR",
-    excerpt:
-      "Experiencing fever for nearly three days after undergoing an angioplasty and stenting procedure seemed abnormal to 76-year-old businessman Mohamed Salim. Read how the infected stent was successfully removed at Apollo Hospitals OMR, Chennai.",
+    excerpt: "Experiencing fever for nearly three days after under- going an angioplasty and sten- ting procedure seemed abnor mal to 76-year-old businessman Mohamed Salim 76-year-old gets infected stent removed from heart newvenusclinic.com 1 August 2024 76-year-old...",
+    homeExcerpt: "Experiencing fever for nearly three days after under- going an angioplasty and sten- ting procedure seemed abnor mal...",
   },
   {
     slug: "man-treated-for-cardiac-stent-infection",
@@ -36,13 +36,13 @@ const BLOG_POSTS = [
     width: 768,
     height: 338,
     alt: "News clipping: Man treated for cardiac stent infection at Apollo Hospital Perungudi",
-    excerpt:
-      "A 77-year-old man was recently treated at Apollo Perungudi Hospital\u2019s branch for a rare cardiac stent infection. Dr. R. Kannaiyan, Dr. Madhu Prabhu Doss, and Dr. M.M. Yusuf led the high-risk procedure.",
+    excerpt: "A 77-year-old man was re- cently treated at Apollo PerungudiHospital's branch for a rare cardiac infection. Man treated for cardiac stent infection newvenusclinic.com 1 August 2024 The Hindu Bureau Chennai A 77-year-old man was re-...",
+    homeExcerpt: "A 77-year-old man was re- cently treated at Apollo PerungudiHospital's branch for a rare cardiac infection. Man treated...",
   },
   {
     slug: "intracoronary-stent-extraction-surgery-tamil",
     url: "intracoronary-stent-extraction-surgery-tamil.html",
-    title: "\u0b87\u0ba4\u0baf \u0ba8\u0bcb\u0baf\u0bbe\u0bb3\u0bbf\u0b95\u0bcd\u0b95\u0bc1\u0b87\u0ba9\u0bcd\u0b9f\u0bcd\u0bb0\u0bbe \u0b95\u0bb0\u0bcb\u0ba9\u0bb0\u0bbf \u0bb8\u0bcd\u0b9f\u0bc6\u0ba9\u0bcd\u0b9f\u0bcd \u0baa\u0bbf\u0bb0\u0bbf\u0ba4\u0bcd\u0ba4\u0bc6\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0b85\u0bb1\u0bc1\u0bb5\u0bc8 \u0b9a\u0bbf\u0b95\u0bbf\u0b9a\u0bcd\u0b9a\u0bc8",
+    title: "இதய நோயாளிக்குஇன்ட்ரா கரோனரி ஸ்டென்ட் பிரித்தெடுக்கும் அறுவை சிகிச்சை",
     lang: "ta",
     date: "1 August 2024",
     dateShort: "01 Aug 2024",
@@ -53,14 +53,13 @@ const BLOG_POSTS = [
     width: 570,
     height: 248,
     alt: "Tamil press coverage of intracoronary stent extraction surgery at Apollo OMR Hospital",
-    excerpt:
-      "\u0b93\u0b8e\u0bae\u0bcd\u0b86\u0bb0\u0bbf\u0bb2\u0bcd \u0b89\u0bb3\u0bcd\u0bb3 \u0b85\u0baa\u0bcd\u0baa\u0bcb\u0bb2\u0bcb \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8\u0baf\u0bbf\u0bb2\u0bcd 76 \u0bb5\u0baf\u0ba4\u0bc1 \u0ba8\u0bcb\u0baf\u0bbe\u0bb3\u0bbf\u0b95\u0bcd\u0b95\u0bc1 \u0b87\u0ba4\u0baf\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd \u0b87\u0ba9\u0bcd\u0b9f\u0bcd\u0bb0\u0bbe \u0b95\u0bb0\u0bcb\u0ba9\u0bb0\u0bbf \u0bb8\u0bcd\u0b9f\u0bc6\u0ba9\u0bcd\u0b9f\u0bcd \u0baa\u0bbf\u0bb0\u0bbf\u0ba4\u0bcd\u0ba4\u0bc6\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4 \u0b85\u0bb1\u0bc1\u0bb5\u0bc8 \u0b9a\u0bbf\u0b95\u0bbf\u0b9a\u0bcd\u0b9a\u0bc8 \u0b95\u0bc1\u0bb1\u0bbf\u0ba4\u0bcd\u0ba4 \u0baa\u0ba4\u0bcd\u0ba4\u0bbf\u0bb0\u0bbf\u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bb0\u0bcd \u0b9a\u0ba8\u0bcd\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc1 \u0ba8\u0bc1\u0b99\u0bcd\u0b95\u0bae\u0bcd\u0baa\u0bbe\u0b95\u0bcd\u0b95\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd \u0ba8\u0b9f\u0ba8\u0bcd\u0ba4\u0ba4\u0bc1.",
+    excerpt: "ஓஎம்ஆரில் உள்ள அப்போலோ மருத்துவமனையில் 76 வயது நோயாளிக்கு இதயத்தில் இன்ட்ரா கரோனரி ஸ்டென்ட் பிரித்தெடுத்த அறுவை சிகிச்சை குறித்த பத்திரிகையாளர் சந்திப்பு நுங்கம்பாக்கத்தில் நடந்தது. இதய நோயாளிக்குஇன்ட்ரா கரோனரி ஸ்டென்ட் பிரித்தெடுக்கும் அறுவை சிகிச்சை newvenusclinic.com 1 August 2024 இதய நோயாளிக்கு ஓஎம்ஆரில் உள்ள அப்போலோ...",
+    homeExcerpt: "ஓஎம்ஆரில் உள்ள அப்போலோ மருத்துவமனையில் 76 வயது நோயாளிக்கு இதயத்தில் இன்ட்ரா கரோனரி ஸ்டென்ட் பிரித்தெடுத்த அறுவை சிகிச்சை குறித்த பத்திரிகையாளர் சந்திப்பு நுங்கம்பாக்கத்தில்...",
   },
   {
     slug: "apollo-omr-complex-stent-extraction-achievement-tamil",
     url: "apollo-omr-complex-stent-extraction-achievement-tamil.html",
-    title:
-      "\u0b85\u0baa\u0bcd\u0baa\u0bcb\u0bb2\u0bcb OMR \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8 \u0bae\u0bbf\u0b95\u0bb5\u0bc1\u0bae\u0bcd \u0b9a\u0bbf\u0b95\u0bcd\u0b95\u0bb2\u0bbe\u0ba9, \u0b87\u0ba4\u0baf\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd \u0baa\u0bca\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b89\u0bb1\u0bc8 \u0b95\u0bc1\u0bb4\u0bbe\u0baf\u0bc8 \u0bae\u0bbf\u0b95\u0ba4\u0bcd\u0ba4\u0bc1\u0bb2\u0bcd\u0bb2\u0bbf\u0baf\u0bae\u0bbe\u0b95 \u0baa\u0bbf\u0bb0\u0bbf\u0ba4\u0bcd\u0ba4\u0bc1 \u0b8e\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1 \u0b9a\u0bbe\u0ba4\u0ba9\u0bc8!",
+    title: "அப்போலோ OMR மருத்துவமனை மிகவும் சிக்கலான, இதயத்தில் பொருத்தப்பட்ட உறை குழாயை மிகத்துல்லியமாக பிரித்து எடுத்து சாதனை!",
     lang: "ta",
     date: "1 August 2024",
     dateShort: "01 Aug 2024",
@@ -71,14 +70,13 @@ const BLOG_POSTS = [
     width: 872,
     height: 644,
     alt: "Tamil feature report on Apollo OMR Hospital high-risk intracoronary stent extraction procedure",
-    excerpt:
-      "\u0bae\u0bbf\u0b95\u0bb5\u0bc1\u0bae\u0bcd \u0b85\u0bb0\u0bbf\u0ba4\u0bbe\u0ba9 \u0bae\u0bc7\u0bb2\u0bc1\u0bae\u0bcd \u0b85\u0ba4\u0bbf\u0b95 \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc1\u0bb3\u0bcd\u0bb3 \u0ba8\u0bcb\u0baf\u0bbe\u0bb3\u0bbf\u0b95\u0bcd\u0b95\u0bc1 \u0baa\u0bca\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f\u0bc1 \u0b87\u0bb0\u0bc1\u0ba8\u0bcd\u0ba4 \u0b87\u0ba9\u0bcd\u0b9f\u0bcd\u0bb0\u0bbe\u0b95\u0bcb\u0bb0\u0bcb\u0ba9\u0bb0\u0bbf \u0b89\u0bb1\u0bc8 \u0b95\u0bc1\u0bb4\u0bbe\u0baf\u0bc8\u0baa\u0bcd \u0baa\u0bbf\u0bb0\u0bbf\u0ba4\u0bcd\u0ba4\u0bc6\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1 \u0b87\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bbf\u0bb1\u0ba4\u0bc1 \u0b85\u0baa\u0bcd\u0baa\u0bcb\u0bb2\u0bcb \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8.",
+    excerpt: "மிகவும் அரிதான மேலும் அதிக ஆபத்துள்ள நோயாளிக்கு பொருத்தப்பட்டு இருந்த இன்ட்ராகோரோனரி உறை குழாயைப் பிரித்தெடுத்து இருக்கிறது அப்போலோ மருத்துவமனை. அப்போலோ OMR மருத்துவமனை மிகவும் சிக்கலான, இதயத்தில் பொருத்தப்பட்ட உறை குழாயை மிகத்துல்லியமாக பிரித்து எடுத்து சாதனை! newvenusclinic.com 1 August 2024 சாதனை! சென்னை, சென்னை...",
+    homeExcerpt: "மிகவும் அரிதான மேலும் அதிக ஆபத்துள்ள நோயாளிக்கு பொருத்தப்பட்டு இருந்த இன்ட்ராகோரோனரி உறை குழாயைப் பிரித்தெடுத்து இருக்கிறது அப்போலோ மருத்துவமனை. அப்போலோ OMR மருத்துவமனை...",
   },
   {
     slug: "risky-bypass-surgery-gives-new-life-to-76-year-old-hindi",
     url: "risky-bypass-surgery-gives-new-life-to-76-year-old-hindi.html",
-    title:
-      "\u091c\u094b\u0916\u093f\u092e \u092d\u0930\u0940 \u092c\u093e\u0908\u092a\u093e\u0938 \u0938\u0930\u094d\u091c\u0930\u0940 \u0938\u0947 76 \u0938\u093e\u0932 \u0915\u0947 \u092c\u0941\u091c\u0941\u0930\u094d\u0917 \u0915\u094b \u092e\u093f\u0932\u0940 \u0928\u0908 \u091c\u093f\u0902\u0926\u0917\u0940",
+    title: "जोखिम भरी बाईपास सर्जरी से 76 साल के बुजुर्ग को मिली नई जिंदगी",
     lang: "hi",
     date: "1 August 2024",
     dateShort: "01 Aug 2024",
@@ -89,14 +87,13 @@ const BLOG_POSTS = [
     width: 1350,
     height: 416,
     alt: "Hindi news coverage of risky bypass surgery saving a 76-year-old patient at Apollo Hospital",
-    excerpt:
-      "\u091a\u0947\u0928\u094d\u0928\u0908. \u0913\u090f\u092e\u0906\u0930 \u0938\u094d\u0925\u093f\u0924 \u090f\u0915 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0939\u0949\u0938\u094d\u092a\u093f\u091f\u0932 \u092e\u0947\u0902 76 \u0938\u093e\u0932 \u0915\u0947 \u092c\u0941\u091c\u0941\u0930\u094d\u0917 \u0915\u0947 \u0939\u0943\u0926\u092f \u092e\u0947\u0902 \u0932\u0917\u093e \u0938\u094d\u091f\u0947\u0902\u091f \u0928\u093f\u0915\u093e\u0932\u0915\u0930 \u091c\u091f\u093f\u0932 \u092c\u093e\u0908\u092a\u093e\u0938 \u0938\u0930\u094d\u091c\u0930\u0940 \u0915\u0930 \u0909\u0928\u094d\u0939\u0947\u0902 \u0928\u092f\u093e \u091c\u0940\u0935\u0928\u0926\u093e\u0928 \u0926\u093f\u092f\u093e \u0917\u092f\u093e\u0964",
+    excerpt: "चेन्नई. ओएमआर स्थित एक प्राइवेट हॉस्पिटल में 76 साल के बुजुर्ग के हृदय में लगा स्टेंट निकालकर जटिल बाईपास सर्जरी कर उन्हें नया जीवनदान दिया गया। हालांकि यह हार्ट सर्जरी आम बात हो गई है,...",
+    homeExcerpt: "चेन्नई. ओएमआर स्थित एक प्राइवेट हॉस्पिटल में 76 साल के बुजुर्ग के हृदय में लगा स्टेंट निकालकर जटिल...",
   },
   {
     slug: "rare-cardiac-treatment-at-apollo-hospital-telugu",
     url: "rare-cardiac-treatment-at-apollo-hospital-telugu.html",
-    title:
-      "\u0c05\u0c2a\u0c4b\u0c32\u0c4b \u0c06\u0c38\u0c41\u0c2a\u0c24\u0c4d\u0c30\u0c3f\u0c32\u0c4b \u0c05\u0c30\u0c41\u0c26\u0c48\u0c28 \u0c1a\u0c3f\u0c15\u0c3f\u0c24\u0c4d\u0c38",
+    title: "అపోలో ఆసుపత్రిలో అరుదైన చికిత్స",
     lang: "te",
     date: "1 August 2024",
     dateShort: "01 Aug 2024",
@@ -107,14 +104,13 @@ const BLOG_POSTS = [
     width: 1281,
     height: 438,
     alt: "Telugu press coverage of rare intracoronary stent extraction treatment at Apollo OMR Hospital",
-    excerpt:
-      "\u0c35\u0c3f\u0c32\u0c4d\u0c32\u0c3f\u0c35\u0c3e\u0c15\u0c02 \u0c28\u0c4d\u0c2f\u0c42\u0c38\u0c4d: \u0c1a\u0c46\u0c28\u0c4d\u0c28\u0c48, \u0c05\u0c2a\u0c4b\u0c32\u0c4b \u0c12\u0c0e\u0c02\u0c06\u0c30\u0c4d \u0c39\u0c3e\u0c38\u0c4d\u0c2a\u0c3f\u0c1f\u0c32\u0c4d, \u0c05\u0c30\u0c41\u0c26\u0c48\u0c28 \u0c2e\u0c30\u0c3f\u0c2f\u0c41 \u0c05\u0c27\u0c3f\u0c15-\u0c30\u0c3f\u0c38\u0c4d\u0c15\u0c4d \u0c07\u0c02\u0c1f\u0c4d\u0c30\u0c3e\u0c15\u0c4b\u0c30\u0c4b\u0c28\u0c30\u0c40 \u0c38\u0c4d\u0c1f\u0c46\u0c02\u0c1f\u0c4d \u0c35\u0c46\u0c32\u0c3f\u0c15\u0c3f\u0c24\u0c40\u0c24 \u0c2a\u0c4d\u0c30\u0c15\u0c4d\u0c30\u0c3f\u0c2f\u0c28\u0c41 \u0c35\u0c3f\u0c1c\u0c2f\u0c35\u0c02\u0c24\u0c02\u0c17\u0c3e \u0c28\u0c3f\u0c30\u0c4d\u0c35\u0c39\u0c3f\u0c02\u0c1a\u0c21\u0c02 \u0c26\u0c4d\u0c35\u0c3e\u0c30\u0c3e \u0c17\u0c41\u0c02\u0c21\u0c46 \u0c36\u0c38\u0c4d\u0c24\u0c4d\u0c30\u0c1a\u0c3f\u0c15\u0c3f\u0c24\u0c4d\u0c38\u0c32\u0c4b \u0c05\u0c26\u0c4d\u0c2d\u0c41\u0c24\u0c2e\u0c48\u0c28 \u0c35\u0c3f\u0c1c\u0c2f\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c38\u0c3e\u0c27\u0c3f\u0c02\u0c1a\u0c3f\u0c02\u0c26\u0c3f.",
+    excerpt: "విల్లివాకం న్యూస్: చెన్నై, అపోలో ఒఎంఆర్ హాస్పిటల్, అరుదైన మరియు అధిక-రిస్క్ ఇంట్రాకోరోనరీ స్టెంట్ వెలికితీత ప్రక్రియను విజయవంతంగా నిర్వహించడం ద్వారా గుండె శస్త్రచికిత్సలో అద్భుతమైన విజయాన్ని సాధించింది. బుధవారం ఏర్పాటైన సమావేశంలో సీనియర్ కన్సల్టెంట్- మెడిసిన్, డాక్టర్ కన్నయన్, కార్డియాల జిస్ట్ డాక్టర్ మధు ప్రభుద, సలీం(రోగి),...",
+    homeExcerpt: "విల్లివాకం న్యూస్: చెన్నై, అపోలో ఒఎంఆర్ హాస్పిటల్, అరుదైన మరియు అధిక-రిస్క్ ఇంట్రాకోరోనరీ స్టెంట్ వెలికితీత ప్రక్రియను విజయవంతంగా నిర్వహించడం ద్వారా గుండె శస్త్రచికిత్సలో...",
   },
   {
     slug: "uyirukku-achcuruttalana-stent-ubagaram-mutiyavarai-kattha-marutthuvargal",
     url: "uyirukku-achcuruttalana-stent-ubagaram-mutiyavarai-kattha-marutthuvargal.html",
-    title:
-      "\u0b89\u0baf\u0bbf\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0b85\u0b9a\u0bcd\u0b9a\u0bc1\u0bb1\u0bc1\u0ba4\u0bcd\u0ba4\u0bb2\u0bbe\u0ba9 \u0bb8\u0bcd\u0b9f\u0bc6\u0ba9\u0bcd\u0b9f\u0bcd \u0b89\u0baa\u0b95\u0bb0\u0ba3\u0bae\u0bcd: \u0bae\u0bc1\u0ba4\u0bbf\u0baf\u0bb5\u0bb0\u0bc8\u0b95\u0bcd \u0b95\u0bbe\u0ba4\u0bcd\u0ba4 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bb0\u0bcd\u0b95\u0bb3\u0bcd",
+    title: "உயிருக்கு அச்சுறுத்தலான ஸ்டென்ட் உபகரணம்: முதியவரைக் காத்த மருத்துவர்கள்",
     lang: "ta",
     date: "1 August 2024",
     dateShort: "01 Aug 2024",
@@ -125,14 +121,13 @@ const BLOG_POSTS = [
     width: 1423,
     height: 395,
     alt: "Tamil news report on life-saving stent device removal surgery for elderly patient at Apollo Hospital",
-    excerpt:
-      "\u0b87\u0ba4\u0baf \u0ba8\u0bbe\u0bb3\u0ba4\u0bcd \u0ba4\u0bbf\u0bb2\u0bcd \u0baa\u0bca\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0bb8\u0bcd\u0b9f\u0bc6\u0ba9\u0bcd\u0b9f\u0bcd \u0b89\u0baa\u0b95\u0bb0\u0ba3\u0ba4\u0bcd\u0ba4\u0bbe\u0bb2\u0bcd \u0ba4\u0bca\u0bb1\u0bcd\u0bb1\u0bc1 \u0baa\u0bbe\u0ba4\u0bbf\u0baa\u0bcd \u0baa\u0bc1\u0b95\u0bcd\u0b95\u0bc1\u0bb3\u0bcd\u0bb3\u0bbe\u0b95\u0bbf \u0b89\u0baf\u0bbf\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bbe\u0ba9 \u0ba8\u0bbf\u0bb2\u0bc8\u0baf\u0bbf\u0bb2\u0bcd \u0b87\u0bb0\u0bc1\u0ba8\u0bcd\u0ba4 \u0bae\u0bc1\u0ba4\u0bbf\u0baf\u0bb5\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0ba8\u0bc1\u0b9f\u0bcd\u0baa\u0bae\u0bbe\u0b95 \u0b9a\u0bbf\u0b95\u0bbf\u0b9a\u0bcd\u0b9a\u0bc8\u0baf\u0bb3\u0bbf\u0ba4\u0bcd\u0ba4\u0bc1 \u0b85\u0baa\u0bcd \u0baa\u0bb2\u0bcd\u0bb2\u0bcb \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0b95\u0bcd \u0b95\u0bc1\u0bb4\u0bc1\u0bb5\u0bbf\u0ba9\u0bb0\u0bcd \u0b89\u0baf\u0bbf\u0bb0\u0bcd \u0b95\u0bbe\u0ba4\u0bcd\u0ba4\u0bc1\u0bb3\u0bcd\u0bb3\u0ba9\u0bb0\u0bcd.",
+    excerpt: "இதய நாளத் தில் பொருத்தப்பட்ட ஸ்டென்ட் உபகரணத்தால் தொற்று பாதிப் புக்குள்ளாகி உயிருக்கு ஆபத்தான நிலையில் இருந்த முதியவருக்கு நுட்பமாக சிகிச்சையளித்து அப் பல்லோ மருத்துவக் குழுவினர் உயிர் காத்துள்ளனர். இதுதொடர்பாக மனை நிர்வாகிகள் கூறியதாவது: உயிருக்கு அச்சுறுத்தலான ஸ்டென்ட் உபகரணம்: முதியவரைக் காத்த மருத்துவர்கள் newvenusclinic.com 1...",
+    homeExcerpt: "இதய நாளத் தில் பொருத்தப்பட்ட ஸ்டென்ட் உபகரணத்தால் தொற்று பாதிப் புக்குள்ளாகி உயிருக்கு ஆபத்தான நிலையில் இருந்த முதியவருக்கு நுட்பமாக சிகிச்சையளித்து அப் பல்லோ...",
   },
   {
     slug: "intracoronary-stent-surgery-dinakaran-tamil",
     url: "intracoronary-stent-surgery-dinakaran-tamil.html",
-    title:
-      "\u0b87\u0ba4\u0baf \u0ba8\u0bcb\u0baf\u0bbe\u0bb3\u0bbf\u0b95\u0bcd\u0b95\u0bc1\u0b87\u0ba9\u0bcd\u0b9f\u0bcd\u0bb0\u0bbe \u0b95\u0bb0\u0bcb\u0ba9\u0bb0\u0bbf \u0bb8\u0bcd\u0b9f\u0bc6\u0ba9\u0bcd\u0b9f\u0bcd \u0baa\u0bbf\u0bb0\u0bbf\u0ba4\u0bcd\u0ba4\u0bc6\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0b85\u0bb1\u0bc1\u0bb5\u0bc8 \u0b9a\u0bbf\u0b95\u0bbf\u0b9a\u0bcd\u0b9a\u0bc8 (\u0ba4\u0bbf\u0ba9\u0b95\u0bb0\u0ba9\u0bcd)",
+    title: "இதய நோயாளிக்குஇன்ட்ரா கரோனரி ஸ்டென்ட் பிரித்தெடுக்கும் அறுவை சிகிச்சை",
     lang: "ta",
     date: "1 August 2024",
     dateShort: "01 Aug 2024",
@@ -143,8 +138,8 @@ const BLOG_POSTS = [
     width: 1130,
     height: 497,
     alt: "Tamil newspaper coverage of intracoronary stent extraction surgery at Apollo OMR by Dinakaran",
-    excerpt:
-      "\u0b93\u0b8e\u0bae\u0bcd\u0b86\u0bb0\u0bbf\u0bb2\u0bcd \u0b89\u0bb3\u0bcd\u0bb3 \u0b85\u0baa\u0bcd\u0baa\u0bcb\u0bb2\u0bcb \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8\u0baf\u0bbf\u0bb2\u0bcd 76 \u0bb5\u0baf\u0ba4\u0bc1 \u0ba8\u0bcb\u0baf\u0bbe\u0bb3\u0bbf\u0b95\u0bcd\u0b95\u0bc1 \u0b87\u0ba4\u0baf\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd \u0b87\u0ba9\u0bcd\u0b9f\u0bcd\u0bb0\u0bbe \u0b95\u0bb0\u0bcb\u0ba9\u0bb0\u0bbf \u0bb8\u0bcd\u0b9f\u0bc6\u0ba9\u0bcd\u0b9f\u0bcd \u0baa\u0bbf\u0bb0\u0bbf\u0ba4\u0bcd\u0ba4\u0bc6\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4 \u0b85\u0bb1\u0bc1\u0bb5\u0bc8 \u0b9a\u0bbf\u0b95\u0bbf\u0b9a\u0bcd\u0b9a\u0bc8 \u0b95\u0bc1\u0bb1\u0bbf\u0ba4\u0bcd\u0ba4 \u0baa\u0ba4\u0bcd\u0ba4\u0bbf\u0bb0\u0bbf\u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bb0\u0bcd \u0b9a\u0ba8\u0bcd\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc1 \u0ba8\u0bc1\u0b99\u0bcd\u0b95\u0bae\u0bcd\u0baa\u0bbe\u0b95\u0bcd\u0b95\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd \u0ba8\u0b9f\u0ba8\u0bcd\u0ba4\u0ba4\u0bc1.",
+    excerpt: "ஓஎம்ஆரில் உள்ள அப்போலோ மருத்துவமனையில் 76 வயது நோயாளிக்கு இதயத்தில் இன்ட்ரா கரோனரி ஸ்டென்ட் பிரித்தெடுத்த அறுவை சிகிச்சை குறித்த பத்திரிகையாளர் சந்திப்பு நுங்கம்பாக்கத்தில் நடந்தது. இதில், சிகிச்சை பெற்ற சலீம், இதய அறுவை சிகிச்சை மருத்துவர் யூசுப், டாக்டர்கள் கல்யாணராமன், கண்ணையன், மது பிரபுதாஸ் கலந்துகொண்டனர். இதய...",
+    homeExcerpt: "ஓஎம்ஆரில் உள்ள அப்போலோ மருத்துவமனையில் 76 வயது நோயாளிக்கு இதயத்தில் இன்ட்ரா கரோனரி ஸ்டென்ட் பிரித்தெடுத்த அறுவை சிகிச்சை குறித்த பத்திரிகையாளர் சந்திப்பு நுங்கம்பாக்கத்தில்...",
   },
   {
     slug: "complex-stent-extraction-performed-successfully",
@@ -160,8 +155,8 @@ const BLOG_POSTS = [
     width: 1228,
     height: 457,
     alt: "News clipping: Complex Stent Extraction Performed Successfully at Apollo OMR Hospital Chennai",
-    excerpt:
-      "DOCTORS at Apollo OMR Hospital recently removed a stent, which led to intracoronary infection, from the coronary artery of a 76-year-old patient with precision. It was a rare and high-risk intracoronary stent extraction procedure.",
+    excerpt: "DOCTORS at Apollo OMR Hos- pital recently removed a stent, which led to intracoronary in- fection, from the coronary ar- tery of a 76-year-old patient with precision. It was a rare and high-risk intracoronary stent...",
+    homeExcerpt: "DOCTORS at Apollo OMR Hos- pital recently removed a stent, which led to intracoronary in- fection, from the...",
   },
 ];
 
@@ -185,10 +180,12 @@ function setPageParam(p) {
   history.replaceState(null, "", url.toString());
 }
 
-function createBlogCard(post) {
+function createBlogCard(post, isHome = false) {
+  const heading = isHome ? "h3" : "h2";
+  const excerpt = isHome ? post.homeExcerpt : post.excerpt;
   const langAttr = post.lang !== "en" ? ` lang="${post.lang}"` : "";
   return `
-    <article class="article-card article-card--horizontal" data-slug="${post.slug}"${langAttr}>
+    <article class="article-card${isHome ? "" : " article-card--horizontal"}" data-slug="${post.slug}"${langAttr}>
       <div class="article-image">
         <a href="${post.url}" aria-label="${escapeAttr(post.title)}">
           <picture>
@@ -196,12 +193,11 @@ function createBlogCard(post) {
             <img src="${post.image}" alt="${escapeAttr(post.alt)}" width="${post.width}" height="${post.height}" loading="lazy">
           </picture>
         </a>
-        <span class="article-category" lang="en">Blog</span>
+        <a href="blog-archive.html" class="article-category" lang="en">Blog</a>
       </div>
       <div class="article-content">
-        <div class="article-date" lang="en"><time datetime="${post.dateISO}">${post.date}</time></div>
-        <h2><a href="${post.url}">${escapeHtml(post.title)}</a></h2>
-        <p class="article-excerpt"${langAttr}>${escapeHtml(post.excerpt)}</p>
+        <${heading}><a href="${post.url}">${escapeHtml(post.title)}</a></${heading}>
+        <p class="article-excerpt"${langAttr}>${escapeHtml(excerpt)}</p>
         <a href="${post.url}" class="read-more" lang="en" aria-label="Read more: ${escapeAttr(post.title)}">Read More <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
       </div>
     </article>`;
@@ -282,3 +278,27 @@ if (typeof module !== "undefined" && module.exports) {
 }
 
 
+
+function setupHomeArticles() {
+  const grid = document.getElementById("homeArticlesGrid");
+  if (!grid) return;
+
+  const previous = document.querySelector("[data-article-prev]");
+  const next = document.querySelector("[data-article-next]");
+  let start = 0;
+
+  function changePage(direction) {
+    start += direction * PAGE_SIZE;
+    const posts = BLOG_POSTS.slice(start, start + PAGE_SIZE);
+    grid.innerHTML = posts.map((post) => createBlogCard(post, true)).join("");
+    previous.disabled = start === 0;
+    next.disabled = start + PAGE_SIZE >= BLOG_POSTS.length;
+  }
+
+  previous.addEventListener("click", () => changePage(-1));
+  next.addEventListener("click", () => changePage(1));
+}
+
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", setupHomeArticles);
+}
