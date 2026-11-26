@@ -280,23 +280,103 @@ if (typeof module !== "undefined" && module.exports) {
 
 
 function setupHomeArticles() {
-  const grid = document.getElementById("homeArticlesGrid");
-  if (!grid) return;
+  const viewport = document.getElementById("homeArticlesGrid");
+  if (!viewport) return;
 
   const previous = document.querySelector("[data-article-prev]");
   const next = document.querySelector("[data-article-next]");
-  let start = 0;
+  const total = BLOG_POSTS.length;
+  const SPEED = 40; // pixels per second
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function changePage(direction) {
-    start += direction * PAGE_SIZE;
-    const posts = BLOG_POSTS.slice(start, start + PAGE_SIZE);
-    grid.innerHTML = posts.map((post) => createBlogCard(post, true)).join("");
-    previous.disabled = start === 0;
-    next.disabled = start + PAGE_SIZE >= BLOG_POSTS.length;
+  // Two identical copies make a seamless loop: when the track has moved one
+  // full copy, the offset wraps back and the visible cards are the same.
+  // The second copy is inert so keyboard focus and screen readers skip it.
+  const cards = BLOG_POSTS.map((post) => createBlogCard(post, true));
+  const clones = cards.map((html) => html.replace("<article ", "<article inert "));
+  const track = document.createElement("div");
+  track.className = "home-marquee-track";
+  track.innerHTML = cards.join("") + clones.join("");
+
+  viewport.removeAttribute("aria-live");
+  viewport.classList.add("home-marquee");
+  viewport.innerHTML = "";
+  viewport.appendChild(track);
+
+  let offset = 0;      // track position in px, kept within one copy
+  let pending = 0;     // px still to glide after a Previous/Next click
+  let stepPx = 0;      // distance of one card including the gap
+  let setWidth = 0;    // distance of one full copy
+  let paused = false;
+  let visible = true;
+  let last = null;
+
+  function perView() {
+    if (window.matchMedia("(max-width: 767px)").matches) return 1;
+    if (window.matchMedia("(max-width: 992px)").matches) return 2;
+    return 3;
   }
 
-  previous.addEventListener("click", () => changePage(-1));
-  next.addEventListener("click", () => changePage(1));
+  function layout() {
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    const count = perView();
+    const cardWidth = (viewport.clientWidth - gap * (count - 1)) / count;
+    track.querySelectorAll(".article-card").forEach((card) => {
+      card.style.width = cardWidth + "px";
+    });
+    stepPx = cardWidth + gap;
+    setWidth = total * stepPx;
+    offset = wrap(offset);
+    track.style.transform = `translate3d(${offset}px,0,0)`;
+  }
+
+  function wrap(value) {
+    return ((((value % setWidth) + setWidth) % setWidth) - setWidth);
+  }
+
+  function frame(now) {
+    if (last === null) last = now;
+    const dt = Math.min(now - last, 64) / 1000;
+    last = now;
+
+    if (!paused && visible && !reduceMotion) {
+      offset -= SPEED * dt;
+    }
+    if (pending !== 0) {
+      const move = pending * Math.min(1, dt * 7);
+      offset -= move;
+      pending -= move;
+      if (Math.abs(pending) < 0.5) pending = 0;
+    }
+    offset = wrap(offset);
+    track.style.transform = `translate3d(${offset}px,0,0)`;
+    requestAnimationFrame(frame);
+  }
+
+  function pause() { paused = true; }
+  function resume() { paused = false; }
+
+  previous.disabled = false;
+  next.disabled = false;
+  previous.addEventListener("click", () => { pending -= stepPx; });
+  next.addEventListener("click", () => { pending += stepPx; });
+
+  // Pause only while the pointer or keyboard focus is on the cards themselves.
+  viewport.addEventListener("mouseenter", pause);
+  viewport.addEventListener("mouseleave", resume);
+  viewport.addEventListener("focusin", pause);
+  viewport.addEventListener("focusout", resume);
+
+  // Stop moving the track while the section is off screen.
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+    }).observe(viewport);
+  }
+
+  window.addEventListener("resize", layout);
+  layout();
+  requestAnimationFrame(frame);
 }
 
 if (typeof document !== "undefined") {

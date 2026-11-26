@@ -50,7 +50,7 @@
 
   /* Layout spacing */
   --page-gutter: clamp(16px, 3.5vw, 24px);
-  --section-space: clamp(44px, 5.75vw, 80px);
+  --section-space: clamp(28px, 3.5vw, 48px);
   --compact-section-space: clamp(28px, 4vw, 52px);
   --heading-space: clamp(26px, 3.4vw, 44px);
   --layout-gap: clamp(24px, 3.8vw, 48px);
@@ -197,40 +197,29 @@ textarea {
 }
 
 .section-tag {
-  display: inline-block;
-  font-size: 0.85rem;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #00b39e;
-  background: rgba(0, 229, 204, 0.12);
-  padding: 6px 16px;
-  letter-spacing: 1.8px;
+  line-height: 1.4;
   color: var(--teal-accent);
-  background: var(--primary-tint);
-  border: 1px solid rgba(0, 229, 204, 0.25);
-  padding: 6px 18px;
-  border-radius: var(--radius-full);
-  margin-bottom: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .section-tag.light {
-  color: #00e5cc;
   color: var(--primary);
-  background: rgba(0, 229, 204, 0.16);
-  border-color: rgba(0, 229, 204, 0.35);
 }
 
-.section-tag::before {
+/* Short accent rule; centred headings get one on each side */
+.section-tag::before,
+.section-header.text-center .section-tag::after {
   content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  width: 32px;
+  height: 2px;
+  flex-shrink: 0;
+  border-radius: 2px;
   background-color: currentColor;
 }
 
@@ -4005,6 +3994,8 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* Match the text column so both start and end on the same lines */
+  align-self: stretch;
 }
 
 .about-img-backdrop-cyan {
@@ -4027,21 +4018,37 @@ textarea {
   overflow: hidden;
 }
 
-.about-img-top img {
+.about-img-top {
+  flex: 1 1 0;
+  min-height: 250px;
+}
+
+.about-img-bottom {
+  flex: 1 1 0;
+  min-height: 220px;
+}
+
+/* Out of flow, so photo dimensions never stretch the section */
+.about-img-top img,
+.about-img-bottom img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
 }
 
 .about-img-bottom img {
-  width: 85%;
-  height: 220px;
-  object-fit: cover;
+  object-position: center top;
 }
 
 .about-content-col {
   display: flex;
   flex-direction: column;
+}
+
+.about-content-col .section-tag {
+  align-self: flex-start;
 }
 
 .about-lead-desc {
@@ -4151,14 +4158,35 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* Match the steps column so both start and end on the same lines */
+  align-self: stretch;
 }
 
+.work-img-top,
+.work-img-bottom {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 250px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Out of flow, so photo dimensions never stretch the section */
 .work-img-top img,
 .work-img-bottom img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-lg);
+}
+
+.work-img-top img {
+  object-position: center top;
+}
+
+.work-img-bottom img {
+  object-position: 70% center;
 }
 
 .work-steps-col {
@@ -4954,7 +4982,17 @@ textarea {
 
 /* Hero Section Exact Match */
 .hero-image-banner--exact {
-  min-height: 580px;
+  min-height: 680px;
+}
+
+.hero-image-banner--exact .hero-bg-img {
+  object-position: 100% 24%;
+}
+
+@media (max-width: 767px) {
+  .hero-image-banner--exact .hero-bg-img {
+    object-position: center;
+  }
 }
 
 .hero-backdrop-gradient--wedge {
@@ -7226,7 +7264,7 @@ button.articles-page-btn[style*="display: none"] {
   }
 
   .hero-image-banner--exact {
-    min-height: 0;
+    min-height: 480px;
   }
 
   .services-cta-photo-card {
@@ -7474,6 +7512,10 @@ button.articles-page-btn[style*="display: none"] {
 }
 
 .clinic-whatsapp > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  list-style: none;
   width: max-content;
   margin-left: auto;
   padding: 0.7rem 1rem;
@@ -7483,6 +7525,15 @@ button.articles-page-btn[style*="display: none"] {
   cursor: pointer;
   font-weight: 700;
   box-shadow: 0 0.25rem 1rem #12153f33;
+}
+
+/* the WhatsApp icon replaces the default disclosure triangle */
+.clinic-whatsapp > summary::-webkit-details-marker {
+  display: none;
+}
+
+.clinic-whatsapp > summary svg {
+  flex-shrink: 0;
 }
 
 .clinic-whatsapp-panel {
@@ -7509,10 +7560,9 @@ button.articles-page-btn[style*="display: none"] {
   }
 }
 
-/* Shared link feedback. Keep the underline visible against each section's text color. */
+/* Shared link feedback: no underline on hover (keyboard focus still shows the browser ring) */
 a[href]:where(:hover, :focus-visible) {
-  text-decoration: underline;
-  text-underline-offset: 0.22em;
+  text-decoration: none;
 }
 
 .nav-link:hover,
@@ -7532,7 +7582,2478 @@ a:is(.btn, .social-icon, .footer-social-circle, .articles-page-btn, .hero-video-
   box-shadow: 0 0 0 3px rgb(0 179 158 / 32%);
 }
 
-a:is(.brand-logo, .footer-logo-wrap, .doctor-card, .article-image > a, .archive-post > a:first-child):is(:hover, :focus-visible) {
+a:is(.brand-logo, .footer-logo-wrap, .doctor-card, .article-image > a, .archive-post > a:first-child):focus-visible {
   outline: 2px solid var(--teal-accent);
   outline-offset: 3px;
+}
+
+/* Phones: full hero photo first, then the welcome card and quick cards */
+@media (max-width: 767px) {
+  .hero-image-banner--exact {
+    display: block;
+    min-height: 0;
+    background: transparent;
+  }
+
+  .hero-image-banner--exact .hero-image-backdrop {
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-image-banner--exact picture {
+    display: block;
+    height: 100%;
+  }
+
+  .hero-image-banner--exact .hero-bg-img {
+    display: block;
+  }
+
+  .hero-image-banner--exact .hero-backdrop-gradient {
+    display: none;
+  }
+
+  .hero-image-banner--exact .hero-card-container {
+    padding-block: 16px;
+  }
+
+  .hero-image-banner--exact .hero-floating-card {
+    border-color: var(--border-light);
+  }
+
+  .hero-image-banner--exact + .hero-banner-section {
+    margin-top: 0;
+  }
+}
+
+/* Phones: homepage service cards become a swipeable row */
+@media (max-width: 767px) {
+  .services-section:not(.services-section--exact-live) .services-grid {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    /* run to the screen edges while keeping the page gutter inside */
+    margin-inline: calc(-1 * var(--page-gutter));
+    padding-inline: var(--page-gutter);
+    scroll-padding-inline: var(--page-gutter);
+    scrollbar-width: none;
+  }
+
+  .services-section:not(.services-section--exact-live) .services-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* less than full width, so the next card peeks in as a swipe cue */
+  .services-section:not(.services-section--exact-live) .service-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+}
+
+/* Homepage appointment section: visual polish only, markup and copy unchanged */
+.appointment-section .availability-subheading {
+  margin-top: 0;
+  color: var(--teal-dark, #0a6b5e);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1rem;
+}
+
+.appointment-section .availability-at-clinic {
+  background: #ffffff;
+  border: 1px solid #cdeee8;
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-bottom: 22px;
+}
+
+.appointment-section .availability-prompt {
+  font-size: 1.3rem;
+  color: var(--navy-deep);
+}
+
+.appointment-section .availability-heading {
+  margin-top: 26px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+}
+
+.appointment-section .availability-item {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px 18px 22px;
+  box-shadow: 0 6px 18px rgba(4, 4, 71, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.appointment-section .availability-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(4, 4, 71, 0.08);
+  border-color: #b9e6dc;
+}
+
+.appointment-section .availability-item p {
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.appointment-section .booking-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #cdeee8;
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(4, 4, 71, 0.08);
+}
+
+.appointment-section .booking-card h3 {
+  margin-top: 4px;
+}
+
+.appointment-section .clinic-form {
+  gap: 0.9rem;
+}
+
+.appointment-section .clinic-form label {
+  font-size: 0.9rem;
+  color: var(--navy-deep);
+  margin-bottom: -0.4rem;
+}
+
+.appointment-section .clinic-form input,
+.appointment-section .clinic-form select {
+  border-color: #cfe0ea;
+  border-radius: 12px;
+  background: #fbfefe;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.appointment-section .clinic-form input:focus,
+.appointment-section .clinic-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(0, 229, 204, 0.18);
+}
+
+.appointment-section .clinic-form-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3fbf9;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text-muted);
+}
+
+.appointment-section .clinic-form button {
+  justify-self: stretch;
+  min-height: 52px;
+  border-radius: 999px;
+  font-size: 1.02rem;
+  box-shadow: 0 10px 22px rgba(0, 229, 204, 0.3);
+}
+
+.appointment-section .clinic-form button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 767px) {
+  .appointment-section .availability-item {
+    padding: 16px 16px 16px 18px;
+  }
+}
+
+/* Doctors: simple card, photo with name and role below (home and About Us) */
+.doctors-section {
+  background: #ffffff;
+}
+
+.doctors-section .doctor-card-exact {
+  border: 1px solid #e6edf3;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: none;
+  transition: border-color 0.2s ease;
+}
+
+.doctors-section .doctor-card-exact .doctor-photo {
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  border-bottom: 1px solid #e6edf3;
+}
+
+.doctors-section .doctor-bar-navy--exact {
+  justify-content: flex-start;
+  padding: 18px 16px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.doctors-section .doctor-bar-navy--exact .doc-bar-name {
+  color: var(--navy-deep);
+  font-size: 1.05rem;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.doctors-section .doctor-bar-navy--exact .doc-bar-role {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* needs this specificity to beat the sitewide link hover outline */
+.doctors-section .doctors-grid a.doctor-card-exact:hover:not(:focus-visible) {
+  outline: none;
+  border-color: var(--teal-accent);
+}
+
+.doctors-section .doctor-card-exact,
+.doctors-section .doctor-card-exact:hover,
+.doctors-section .doctor-card-exact * {
+  text-decoration: none !important;
+}
+
+@media (max-width: 640px) {
+  .doctors-section .doctors-grid {
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}
+
+/* Homepage articles: continuous looping track (no gaps, no pause between cards) */
+#homeArticlesGrid.home-marquee {
+  display: block;
+  overflow: hidden;
+  grid-template-columns: none;
+}
+
+.home-marquee-track {
+  display: flex;
+  gap: var(--card-gap);
+  width: max-content;
+  will-change: transform;
+}
+
+.home-marquee-track .article-card {
+  flex: 0 0 auto;
+}
+
+/* Homepage article cards: compact layout, no empty band above "Read More" */
+.home-marquee-track .article-card {
+  flex: 0 0 auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(4, 4, 71, 0.07);
+}
+
+.home-marquee-track .article-image {
+  height: 180px;
+}
+
+.home-marquee-track .article-content {
+  padding: 20px 22px 22px;
+  flex-grow: 0;
+}
+
+.home-marquee-track .article-content :is(h2, h3) {
+  font-size: 1.08rem;
+  line-height: 1.35;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-marquee-track .article-content p {
+  flex-grow: 0;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-marquee-track .read-more {
+  margin-top: auto;
+}
+
+/* Homepage article paging: side by side, with arrow icons */
+.articles-pagination:has([data-article-prev]) {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.articles-pagination [data-article-prev],
+.articles-pagination [data-article-next] {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.articles-pagination [data-article-prev]:hover svg {
+  transform: translateX(-3px);
+}
+
+.articles-pagination [data-article-next]:hover svg {
+  transform: translateX(3px);
+}
+
+.articles-pagination [data-article-prev] svg,
+.articles-pagination [data-article-next] svg {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+/* Homepage article paging: icon-only round buttons */
+.articles-pagination [data-article-prev],
+.articles-pagination [data-article-next] {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Testimonials: split card with the patient on one side and the quote on the other */
+#testimonials.testimonials-section--exact {
+  background: #ffffff;
+}
+
+#testimonials .testimonials-single-wrap,
+#testimonials .testimonials-carousel-wrapper {
+  max-width: 960px;
+  width: 100%;
+}
+
+#testimonials .testimonial-large-quote-mark {
+  display: none;
+}
+
+#testimonials .testimonial-slide {
+  display: flex;
+  padding: 0;
+}
+
+#testimonials .testimonial-card--exact {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  width: 100%;
+  min-height: 320px;
+  height: auto;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #132a5e 0%, #0a1740 100%);
+  text-align: left;
+}
+
+#testimonials .testimonial-card--exact .testimonial-author {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 0;
+  padding: 36px 24px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+#testimonials .author-avatar-img {
+  width: 116px;
+  height: 116px;
+  overflow: hidden;
+  border: 4px solid var(--primary);
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+#testimonials .author-avatar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#testimonials .testimonial-author strong {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+}
+
+#testimonials .testimonial-card--exact .testimonial-quote {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: none;
+  margin: 0;
+  padding: 40px 56px;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-style: normal;
+  line-height: 1.75;
+}
+
+#testimonials .testimonial-quote::before {
+  content: '\201C' / '';
+  height: 52px;
+  color: var(--primary);
+  font-family: Georgia, serif;
+  font-size: 6rem;
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  #testimonials .testimonial-card--exact {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    border-radius: 22px;
+    text-align: center;
+  }
+
+  #testimonials .testimonial-card--exact .testimonial-quote {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 28px 22px;
+    font-size: 1.05rem;
+  }
+
+  #testimonials .testimonial-card--exact .testimonial-author {
+    grid-row: 2;
+    gap: 12px;
+    padding: 22px;
+  }
+
+  #testimonials .author-avatar-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Newsletter and phone strip: a floating card that overlaps the footer */
+.newsletter-strip-section {
+  background: #ffffff;
+  padding: var(--section-space) 0;
+}
+
+.newsletter-strip-section .newsletter-strip-bg {
+  overflow: hidden;
+}
+
+.newsletter-strip-container {
+  background: #ffffff;
+  border: 1px solid #d6efe9;
+  border-radius: 28px;
+  box-shadow: 0 26px 60px rgba(4, 4, 71, 0.16);
+  padding: 34px 40px;
+  position: relative;
+  z-index: 3;
+}
+
+.newsletter-mail-icon {
+  width: 60px;
+  height: 60px;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--primary);
+  color: var(--navy-deep);
+  margin-top: 0;
+  box-shadow: 0 10px 22px rgba(0, 229, 204, 0.3);
+}
+
+.newsletter-mail-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.newsletter-strip-left h3 {
+  font-size: 1.5rem;
+}
+
+.newsletter-strip-phones {
+  gap: 14px;
+}
+
+.newsletter-phone-link {
+  background: #f3fbf9;
+  border: 1px solid #d6efe9;
+  border-radius: 999px;
+  padding: 8px 22px 8px 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletter-phone-link svg {
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--navy-deep);
+}
+
+.newsletter-phone-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(4, 4, 71, 0.1);
+}
+
+@media (max-width: 640px) {
+  .newsletter-strip-container {
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+
+
+  .newsletter-mail-icon {
+    width: 50px;
+    height: 50px;
+    padding: 11px;
+  }
+
+  .newsletter-phone-link {
+    font-size: 1.05rem;
+  }
+}
+
+/* Newsletter strip: no background image, narrower floating card */
+.newsletter-strip-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Newsletter card: text on the left, phone numbers aligned on the right */
+.newsletter-strip-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 32px 40px;
+  padding: 36px 44px;
+  max-width: 900px;
+}
+
+.newsletter-strip-left {
+  max-width: none;
+  align-items: center;
+}
+
+.newsletter-strip-left > div:last-child {
+  min-width: 0;
+}
+
+.newsletter-strip-left p {
+  max-width: 440px;
+}
+
+.newsletter-strip-phones {
+  align-items: stretch;
+  min-width: 260px;
+  padding-left: 40px;
+  border-left: 1px solid #e3f2ef;
+}
+
+.newsletter-phone-link {
+  justify-content: flex-start;
+}
+
+@media (max-width: 760px) {
+  .newsletter-strip-container {
+    grid-template-columns: 1fr;
+    padding: 28px 24px;
+    width: auto;
+    margin-inline: var(--page-gutter);
+  }
+
+  .newsletter-strip-left h3 {
+    line-height: 1.25;
+  }
+
+  .newsletter-strip-phones {
+    min-width: 0;
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid #e3f2ef;
+    padding-top: 20px;
+  }
+}
+
+/* Footer: teal appointment banner on top, then brand / contact / pages (all pages) */
+.footer.footer--exact {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(0, 229, 204, 0.14), transparent 45%),
+    #0b1a45;
+}
+
+.footer--exact .footer-main {
+  padding-block: 72px 56px;
+}
+
+.footer--exact .footer-grid--exact {
+  grid-template-columns: 1.3fr 1.3fr 0.8fr;
+  gap: 48px 64px;
+  align-items: start;
+}
+
+/* Make Appointment becomes a bright banner across the top */
+.footer--exact .footer-grid--exact > .footer-col:nth-child(4) {
+  order: -1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title call"
+    "text call";
+  align-items: center;
+  column-gap: 40px;
+  margin-bottom: 8px;
+  padding: 34px 40px;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #00e5cc 0%, #4ff0dc 100%);
+}
+
+.footer--exact .footer-grid--exact > .footer-col:nth-child(4) .footer-heading {
+  grid-area: title;
+  margin: 0 0 6px;
+  color: #0b1a45;
+  font-size: 1.7rem;
+}
+
+.footer--exact .footer-grid--exact > .footer-col:nth-child(4) .footer-heading::before {
+  display: none;
+}
+
+.footer--exact .footer-appointment-desc {
+  grid-area: text;
+  max-width: 600px;
+  margin: 0;
+  color: #12305f;
+  font-size: 0.98rem;
+}
+
+.footer--exact .footer-call-card {
+  grid-area: call;
+  margin: 0;
+  padding: 12px 30px 12px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #0b1a45;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(11, 26, 69, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.footer--exact .footer-call-card:hover {
+  transform: translateY(-2px);
+}
+
+.footer--exact .footer-call-icon {
+  border-radius: 50%;
+  background: var(--primary);
+  color: #0b1a45;
+}
+
+.footer--exact .footer-call-text strong {
+  color: #ffffff;
+}
+
+.footer--exact .footer-call-text span {
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* headings: small teal dot instead of an underline */
+.footer--exact .footer-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 0;
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.footer--exact .footer-heading::after {
+  display: none;
+}
+
+.footer--exact .footer-heading::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+/* brand column */
+.footer--exact .footer-logo-wrap {
+  margin-bottom: 20px;
+  border-radius: 14px;
+}
+
+.footer--exact .footer-about {
+  max-width: 380px;
+  margin-bottom: 24px;
+  color: #b6c3e4;
+  line-height: 1.75;
+}
+
+.footer--exact .footer-socials--cyan .footer-social-circle {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: transparent;
+  color: #ffffff;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer--exact .footer-socials--cyan .footer-social-circle:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #0b1a45;
+}
+
+/* contact list: plain teal icons, no boxes */
+.footer--exact .contact-info-list {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+}
+
+.footer--exact .contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0;
+  color: #d5def3;
+  line-height: 1.7;
+}
+
+.footer--exact .contact-info-item > svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin: 4px 0 0;
+  padding: 0;
+  background: none;
+  color: var(--primary);
+}
+
+.footer--exact .contact-info-item > :not(svg) {
+  min-width: 0;
+  padding: 0;
+  overflow-wrap: anywhere;
+}
+
+.footer--exact .contact-info-item a {
+  color: #d5def3;
+  text-decoration: none;
+}
+
+.footer--exact .contact-info-item a:hover {
+  color: var(--primary);
+}
+
+/* page links */
+.footer--exact .footer-links {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.footer--exact .footer-links li {
+  margin: 0;
+}
+
+.footer--exact .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #d5def3;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer--exact .footer-links a::after {
+  display: none;
+}
+
+.footer--exact .footer-links a:hover,
+.footer--exact .footer-links a:focus-visible {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+/* bottom bar */
+.footer--exact .footer-bottom {
+  padding: 22px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: #8f9fc6;
+}
+
+@media (max-width: 992px) {
+  .footer--exact .footer-grid--exact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px 40px;
+  }
+
+  .footer--exact .footer-grid--exact > .brand-col {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer--exact .footer-main {
+    padding-block: 48px 40px;
+  }
+
+  .footer--exact .footer-grid--exact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .footer--exact .footer-grid--exact > .footer-col:nth-child(4) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "title"
+      "text"
+      "call";
+    row-gap: 16px;
+    padding: 26px 22px;
+    text-align: left;
+  }
+
+  .footer--exact .footer-grid--exact > .footer-col:nth-child(4) .footer-heading {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+
+  .footer--exact .footer-call-card {
+    justify-self: stretch;
+  }
+
+  .footer--exact .footer-bottom {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Homepage desktop: the menu floats on top of the banner image */
+@media (min-width: 993px) {
+  .home-navbar:has(+ main > .hero-image-banner--exact),
+  .home-navbar.scrolled:has(+ main > .hero-image-banner--exact) {
+    height: 82px;
+    margin-bottom: -82px; /* the banner starts underneath the menu */
+    padding: 18px 0 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .home-navbar:has(+ main > .hero-image-banner--exact) .nav-container {
+    height: 64px;
+    width: calc(100% - 2 * var(--page-gutter));
+    max-width: calc(1240px - 2 * var(--page-gutter));
+    padding-inline: 0; /* line the menu up with the welcome card */
+    background: transparent;
+  }
+
+  /* white menu text sits directly on the photo; the dropdown keeps its own panel */
+  .home-navbar:has(+ main > .hero-image-banner--exact) .home-nav-list > li > .nav-link {
+    color: #ffffff;
+    text-shadow: 0 1px 8px rgba(4, 4, 71, 0.55);
+  }
+
+  .home-navbar:has(+ main > .hero-image-banner--exact) .home-nav-list > li > .nav-link:is(.active, :hover, :focus-visible) {
+    color: var(--primary);
+  }
+
+  .home-navbar:has(+ main > .hero-image-banner--exact) .home-nav-list > li > .nav-link::after {
+    background-color: var(--primary);
+  }
+}
+
+/* Homepage desktop: banner fills the screen below the contact header
+   (landscape only, so tall portrait tablets don't get an oversized banner) */
+@media (min-width: 993px) and (orientation: landscape) {
+  .hero-image-banner.hero-image-banner--exact {
+    min-height: max(680px, calc(100vh - 71px)); /* 71px = contact bar */
+  }
+}
+
+/* Top contact bar: minimal single line (all pages) */
+.home-header-info {
+  padding: 10px 0;
+  border-bottom: 1px solid #eef2f5;
+}
+
+.home-header-info .brand-logo .logo-img {
+  height: 50px;
+  width: auto;
+}
+
+.home-header-info .home-header-contacts {
+  gap: 28px;
+}
+
+.home-header-info .home-header-contact-item {
+  gap: 8px;
+}
+
+.home-header-info .home-contact-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--teal-accent);
+}
+
+.home-header-info .home-contact-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+/* "Mail Us" / "Call Us" titles: kept for screen readers, hidden on screen */
+.home-header-info .home-header-contact-item h3 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.home-header-info .home-header-contact-item p,
+.home-header-info .home-header-contact-item p a {
+  color: var(--navy-deep);
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.home-header-info .home-header-contact-item p a:hover {
+  color: var(--teal-accent);
+}
+
+.home-header-info .home-header-cta .btn-dark-navy {
+  padding: 9px 20px;
+  font-size: 0.84rem;
+}
+
+/* small laptops: drop the email (it is also in the footer) so the bar stays on one line */
+@media (max-width: 1100px) {
+  .home-header-info .home-header-contacts {
+    gap: 20px;
+  }
+
+  .home-header-info .home-header-contact-item:first-child {
+    display: none;
+  }
+}
+
+/* Band sections that set their own padding: match the shared section spacing */
+section.stats-counter-section,
+section.emergency-split-section,
+section.appointments-cta-section,
+section.appointments-stats-section,
+section.appointments-emergency-section {
+  padding-block: var(--section-space);
+}
+
+/* ==========================================================================
+   Mobile and iOS polish (homepage audit)
+   ========================================================================== */
+
+/* iOS: keep text size steady when rotating, no grey flash on tap */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+a,
+button,
+label,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safari counts its toolbars in 100vh; use the visible height where supported */
+@media (min-width: 993px) and (orientation: landscape) {
+  .hero-image-banner.hero-image-banner--exact {
+    min-height: max(680px, calc(100svh - 71px));
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-menu {
+    height: 100dvh;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+}
+
+/* iOS shows date inputs centred and short; match the other fields */
+.clinic-form input[type="date"] {
+  min-height: 2.75rem;
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: left;
+}
+
+.clinic-form input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+/* the small "Blog" label on article photos was under 12px */
+.article-category {
+  font-size: 0.78rem;
+}
+
+@media (max-width: 767px) {
+  /* About: the decorative teal strip poked out past the screen edge */
+  .about-img-backdrop-cyan {
+    display: none;
+  }
+
+  /* quick cards: tappable "View Timetable" link */
+  .banner-card-link {
+    min-height: 44px;
+  }
+
+  /* Why choose us: smaller heading, badges two per row */
+  .trust-section .trust-title {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+
+  .trust-section .trust-badges-grid--2col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .trust-section .trust-badge--exact {
+    padding: 18px 14px;
+    gap: 12px;
+  }
+
+  .trust-section .trust-badge-heading {
+    font-size: 0.95rem;
+  }
+
+  /* Doctors: two per row instead of four tall cards in a column */
+  .doctors-section .doctors-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    max-width: none;
+  }
+
+  .doctors-section .doctor-bar-navy--exact {
+    padding: 12px 10px 14px;
+  }
+
+  .doctors-section .doctor-bar-navy--exact .doc-bar-name {
+    font-size: 0.92rem;
+  }
+
+  .doctors-section .doctor-bar-navy--exact .doc-bar-role {
+    font-size: 0.8rem;
+  }
+
+  /* Newsletter: icon sits above the heading instead of floating beside it */
+  .newsletter-strip-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  /* Footer: page links in two columns, and every link at least 44px tall */
+  .footer--exact .footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 16px;
+  }
+
+  .footer--exact .footer-links a {
+    min-height: 44px;
+  }
+
+  .footer--exact .contact-info-item a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+  }
+
+  /* keep the last content clear of the floating buttons and the iPhone home bar */
+  .footer--exact .footer-bottom {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Inner page banners: taller floating card, lined up with the page content */
+section.page-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(220px, 30vw, 400px);
+  margin: 24px max(var(--page-gutter), calc((100% - 1240px) / 2 + var(--page-gutter))) 0;
+  padding: 48px 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 28px;
+  background: linear-gradient(120deg, #0a1740 0%, #17336b 100%);
+  box-shadow: 0 24px 50px rgba(4, 4, 71, 0.18);
+  text-align: center;
+}
+
+section.page-banner > .container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+section.page-banner .about-banner-bg img {
+  opacity: 0.38;
+}
+
+section.page-banner .page-banner-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.15;
+}
+
+section.page-banner .breadcrumb {
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 14px; /* long article titles wrap, so no full pill */
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 640px) {
+  section.page-banner {
+    min-height: 200px;
+    margin-top: 14px;
+    padding: 36px 0;
+    border-radius: 20px;
+  }
+
+  section.page-banner .breadcrumb {
+    max-width: calc(100% - 16px);
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   FAQ: one shared accordion design (Appointments and Services)
+   ========================================================================== */
+:is(.faq-list, .services-faq-list-exact) {
+  display: grid;
+  gap: 14px;
+}
+
+:is(.faq-list, .services-faq-list-exact) > details:is(.faq-item, .services-faq-row) {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e3ecf1;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+:is(.faq-list, .services-faq-list-exact) > details[open] {
+  border-color: var(--teal-accent);
+  background: #f5fbfa;
+}
+
+details > summary:is(.faq-question, .services-faq-summary) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+  margin: 0;
+  padding: 16px 20px;
+  list-style: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--navy-deep);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+}
+
+details > summary:is(.faq-question, .services-faq-summary)::-webkit-details-marker {
+  display: none;
+}
+
+/* the same round plus icon everywhere; it turns into a minus when open */
+:is(.faq-toggle-icon, .services-faq-chevron) {
+  position: relative;
+  order: 2;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  border-radius: 50%;
+  background: rgba(0, 229, 204, 0.16);
+  color: var(--navy-deep);
+  font-size: 0;
+  transform: none;
+  transition: background-color 0.2s ease;
+}
+
+:is(.faq-toggle-icon, .services-faq-chevron) svg {
+  display: none;
+}
+
+:is(.faq-toggle-icon, .services-faq-chevron)::before,
+:is(.faq-toggle-icon, .services-faq-chevron)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  margin: -1px 0 0 -7px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.2s ease;
+}
+
+:is(.faq-toggle-icon, .services-faq-chevron)::after {
+  transform: rotate(90deg);
+}
+
+/* outranks the older per-page rules that rotated these icons */
+:is(.faq-list, .services-faq-list-exact) > details[open] :is(.faq-toggle-icon, .services-faq-chevron) {
+  background: var(--primary);
+  transform: none;
+}
+
+details[open] :is(.faq-toggle-icon, .services-faq-chevron)::after {
+  transform: rotate(0deg);
+}
+
+details > :is(.faq-answer, .services-faq-body) {
+  margin: 0;
+  padding: 0 20px 20px;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+details > :is(.faq-answer, .services-faq-body) p {
+  margin: 0;
+}
+
+/* Appointments: keep the centred list a readable width */
+.faq-section .faq-list {
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+  details > summary:is(.faq-question, .services-faq-summary) {
+    padding: 14px 16px;
+    font-size: 0.98rem;
+  }
+
+  details > :is(.faq-answer, .services-faq-body) {
+    padding: 0 16px 16px;
+    font-size: 0.92rem;
+  }
+}
+
+/* Homepage: white gap between the quick cards and the About section */
+.hero-banner-section + .about-section {
+  margin-top: var(--section-space);
+}
+
+/* Floating WhatsApp button: round, icon only (same size as the back-to-top button) */
+.clinic-whatsapp > summary {
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  background: #25d366;
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(18, 21, 63, 0.25);
+}
+
+.clinic-whatsapp > summary svg {
+  width: 28px;
+  height: 28px;
+}
+
+.clinic-whatsapp[open] > summary {
+  background: #1da851;
+}
+
+@media (max-width: 640px) {
+  .clinic-whatsapp > summary {
+    width: 50px;
+    height: 50px;
+  }
+
+  .clinic-whatsapp > summary svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* How We Work: same teal backdrop strip as the About photos */
+.work-images-col {
+  position: relative;
+}
+
+.work-images-col::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  z-index: 1;
+  width: 100px;
+  height: calc(100% + 40px);
+  border-radius: var(--radius-lg);
+  background: var(--primary);
+  opacity: 0.35;
+}
+
+.work-img-top,
+.work-img-bottom {
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .work-images-col::before {
+    display: none;
+  }
+}
+
+/* About Us founder: photo matches the text column, clearer hierarchy, qualification cards */
+.founder-section .founder-grid {
+  align-items: stretch;
+}
+
+.founder-section .founder-photo-col {
+  display: flex;
+}
+
+.founder-section .founder-photo-wrap {
+  flex: 1;
+  min-height: 460px;
+  box-shadow: 0 20px 44px rgba(4, 4, 71, 0.12);
+}
+
+.founder-section .founder-photo-wrap picture {
+  display: block;
+  height: 100%;
+}
+
+.founder-section .founder-photo-wrap img {
+  height: 100%;
+  min-height: 460px;
+}
+
+.founder-section .founder-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* white-on-white teal heading was hard to read */
+.founder-section .founder-eyebrow {
+  margin-bottom: 16px;
+  color: var(--navy-deep);
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  letter-spacing: 1px;
+  line-height: 1.15;
+}
+
+/* name and degrees */
+.founder-section .founder-bio-p:first-of-type {
+  color: var(--navy-deep);
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+/* title as a chip */
+.founder-section .founder-bio-p:nth-of-type(2) {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border-radius: 10px;
+  background: rgba(0, 229, 204, 0.14);
+  color: var(--teal-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.founder-section .founder-quals-grid {
+  gap: 14px;
+  margin: 24px 0 30px;
+}
+
+.founder-section .founder-qual-item {
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #e3ecf1;
+  border-radius: 14px;
+  background: #f7fbfb;
+}
+
+.founder-section .founder-qual-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(0, 229, 204, 0.16);
+  color: var(--teal-accent);
+}
+
+.founder-section .founder-qual-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.founder-section .founder-qual-item h3 {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 992px) {
+  .founder-section .founder-photo-wrap,
+  .founder-section .founder-photo-wrap img {
+    min-height: 0;
+  }
+
+  .founder-section .founder-photo-wrap img {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .founder-section .founder-photo-col {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 640px) {
+  .founder-section .founder-photo-wrap img {
+    aspect-ratio: 4 / 4.6;
+  }
+}
+
+/* Logos and image links: no box on mouse hover (keyboard focus ring stays) */
+a:is(.brand-logo, .footer-logo-wrap):hover {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  text-decoration: none;
+}
+
+/* mobile header logo a little bigger too */
+@media (max-width: 992px) {
+  .home-mobile-logo .logo-img,
+  .navbar .brand-logo .logo-img {
+    height: 46px;
+    width: auto;
+  }
+}
+
+/* About Us collage: fill the full height of the text column so tops and bottoms line up */
+@media (min-width: 993px) {
+  .about-container:has(> .about-overlap-collage) {
+    align-items: stretch;
+  }
+
+  .about-overlap-collage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-collage-backdrop {
+    top: 32px;
+  }
+
+  .about-collage-main {
+    flex: 1;
+    min-height: 440px;
+  }
+
+  .about-collage-main picture {
+    display: block;
+    height: 100%;
+  }
+
+  .about-collage-main img {
+    height: 100%;
+    min-height: 440px;
+  }
+
+  .about-collage-inset img {
+    height: 200px;
+  }
+}
+
+/* ==========================================================================
+   Appointments page: CTA card, stat cards, emergency card
+   ========================================================================== */
+section.appointments-cta-section,
+section.appointments-stats-section,
+section.appointments-emergency-section {
+  background: #ffffff;
+  border: 0;
+}
+
+/* --- CTA: navy card --- */
+.appointments-cta-section .appointments-cta-card {
+  max-width: none;
+  padding: clamp(40px, 6vw, 64px) clamp(22px, 5vw, 56px);
+  border-radius: 28px;
+  background: linear-gradient(120deg, #0a1740 0%, #17336b 100%);
+  box-shadow: 0 24px 50px rgba(4, 4, 71, 0.16);
+}
+
+.appointments-cta-section .appointments-cta-icon {
+  background: rgba(0, 229, 204, 0.16);
+  border-radius: 16px;
+}
+
+.appointments-cta-section .appointments-cta-title {
+  max-width: 760px;
+  color: #ffffff;
+}
+
+.appointments-cta-section .appointments-cta-desc {
+  color: #c8d4f0;
+}
+
+.appointments-cta-section .btn-appointments-cta:hover {
+  background: #ffffff;
+  color: var(--navy-deep);
+}
+
+/* --- Stats: four equal cards --- */
+.appointments-stats-section .appointments-stats-grid {
+  gap: 20px;
+}
+
+.appointments-stats-section .appointments-stat-item {
+  justify-content: flex-start;
+  padding: 30px 18px 26px;
+  border: 1px solid #e3ecf1;
+  border-radius: 20px;
+  background: #f7fbfb;
+}
+
+.appointments-stats-section .appointments-stat-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  background: rgba(0, 229, 204, 0.16);
+}
+
+.appointments-stats-section .appointments-stat-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke: var(--teal-accent);
+}
+
+.appointments-stats-section .appointments-stat-number {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-height: 1.1em;
+  margin-bottom: 8px;
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.appointments-stats-section .appointments-stat-label {
+  font-size: 0.98rem;
+}
+
+/* --- Emergency: soft card with equal phone buttons --- */
+.appointments-emergency-section .appointments-emergency-card {
+  max-width: none;
+  padding: clamp(40px, 6vw, 60px) clamp(20px, 5vw, 56px);
+  border: 1px solid #d6efe9;
+  border-radius: 28px;
+  background: #f3fbf9;
+}
+
+.appointments-emergency-section .appointments-emergency-icon {
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(4, 4, 71, 0.08);
+}
+
+.appointments-emergency-section .appointments-emergency-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 1000px;
+}
+
+.appointments-emergency-section .btn-emergency-contact {
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 14px;
+  border: 1px solid #d6efe9;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--navy-deep);
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(4, 4, 71, 0.06);
+}
+
+.appointments-emergency-section .btn-emergency-contact:hover {
+  border-color: var(--teal-accent);
+  background: var(--primary);
+}
+
+@media (max-width: 991px) {
+  .appointments-stats-section .appointments-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .appointments-emergency-section .appointments-emergency-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .appointments-stats-section .appointments-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .appointments-stats-section .appointments-stat-item {
+    padding: 22px 10px 18px;
+  }
+
+  .appointments-stats-section .appointments-stat-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+  }
+
+  .appointments-stats-section .appointments-stat-label {
+    font-size: 0.86rem;
+  }
+
+  .appointments-emergency-section .appointments-emergency-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Doctor profile pages
+   ========================================================================== */
+
+/* banner: specialty as a soft chip under the name */
+.page-banner .doctor-banner-specialty {
+  max-width: min(60ch, 100%);
+  margin: 0;
+  padding: 8px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #e6f0ff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* profile: photo card + details */
+.doctor-profile-hero {
+  padding: var(--section-space) 0;
+  background: #ffffff;
+}
+
+.doctor-profile-hero .migration-profile {
+  grid-template-columns: minmax(260px, 400px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.doctor-profile-hero .migration-profile > div:first-child {
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid #e3ecf1;
+  border-radius: 24px;
+  background: #f3fbf9;
+  box-shadow: 0 20px 44px rgba(4, 4, 71, 0.1);
+}
+
+.doctor-profile-hero .migration-profile > div:first-child picture {
+  display: block;
+  height: 100%;
+}
+
+.doctor-profile-hero .migration-profile > div:first-child img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* placeholder illustrations: show whole, not cropped */
+.doctor-profile-hero .migration-profile img:is([src*="dr-madhavan"], [src*="dr-vadhana"]) {
+  object-fit: contain;
+  object-position: center;
+  padding: 32px;
+  background: #ffffff;
+}
+
+.doctor-profile-hero .migration-profile > div:last-child > h2 {
+  display: inline-flex;
+  margin: 0 0 18px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  background: rgba(0, 229, 204, 0.14);
+  color: var(--teal-accent);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.doctor-profile-hero .migration-profile > div:last-child > div:not(.migration-credentials) p {
+  margin: 0 0 22px;
+  color: var(--navy-deep);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.doctor-profile-hero .migration-credentials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 10px;
+  margin: 0 0 28px;
+}
+
+.doctor-profile-hero .migration-credentials p {
+  position: relative;
+  margin: 0;
+  padding: 12px 14px 12px 42px;
+  border: 1px solid #e3ecf1;
+  border-radius: 12px;
+  background: #f7fbfb;
+  color: var(--navy-deep);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.doctor-profile-hero .migration-credentials p::before {
+  content: '\2713' / '';
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--navy-deep);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.doctor-profile-hero .migration-profile .btn {
+  margin: 0;
+}
+
+/* services */
+.doctor-services-section {
+  padding: var(--section-space) 0;
+  background: #ffffff;
+}
+
+.doctor-services-section .doctor-services-grid {
+  gap: 20px;
+}
+
+.doctor-services-section .doctor-service-card {
+  padding: 28px 18px;
+  border: 1px solid #e3ecf1;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.doctor-services-section .doctor-service-card:hover {
+  border-color: var(--teal-accent);
+}
+
+.doctor-services-section .doctor-service-icon-wrap {
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background: rgba(0, 229, 204, 0.14);
+}
+
+.doctor-services-section .doctor-service-card h3 {
+  color: var(--navy-deep);
+  font-size: 1rem;
+}
+
+/* specialisation and practices */
+.doctor-services-section .migration-profile-lists {
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.doctor-services-section .migration-profile-lists > div {
+  padding: 28px;
+  border: 1px solid #d6efe9;
+  border-radius: 20px;
+  background: #f3fbf9;
+}
+
+.doctor-services-section .migration-profile-lists h3 {
+  margin: 0 0 16px;
+  color: var(--navy-deep);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  letter-spacing: 0.4px;
+}
+
+.doctor-services-section .migration-profile-lists ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.doctor-services-section .migration-profile-lists li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.doctor-services-section .migration-profile-lists li::before {
+  content: '\2713' / '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--navy-deep);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+/* booking: highlight this doctor's timings without a side line */
+.appointment-section .availability-item.availability-item--active {
+  border: 1px solid var(--teal-accent) !important;
+  border-left-width: 1px !important;
+  background: #f3fbf9 !important;
+}
+
+@media (max-width: 767px) {
+  .doctor-profile-hero .migration-profile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doctor-profile-hero .migration-profile > div:first-child {
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
+
+/* phones: the two placeholder illustrations don't need a full-width tall card */
+@media (max-width: 767px) {
+  .doctor-profile-hero .migration-profile > div:first-child:has(img:is([src*="dr-madhavan"], [src*="dr-vadhana"])) {
+    max-width: 240px;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ==========================================================================
+   Contact Us: four equal info cards and a rounded map card
+   ========================================================================== */
+.contact-page-section .contact-layout {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.contact-page-section .contact-card-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  height: 100%;
+  margin: 0;
+  padding: 28px 24px;
+  border: 1px solid #e3ecf1;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(4, 4, 71, 0.05);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-page-section .contact-card-box:hover {
+  border-color: var(--teal-accent);
+  transform: translateY(-3px);
+}
+
+.contact-page-section .contact-box-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  margin: 0;
+  border-radius: 16px;
+  background: rgba(0, 229, 204, 0.16);
+  color: var(--teal-accent);
+}
+
+.contact-page-section .contact-box-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.contact-page-section .contact-card-box h3 {
+  margin: 0 0 10px;
+  color: var(--navy-deep);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+}
+
+.contact-page-section .contact-card-box p,
+.contact-page-section .contact-card-box li {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.contact-page-section .contact-card-box a {
+  color: var(--navy-deep);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-page-section .contact-card-box a:hover {
+  color: var(--teal-accent);
+}
+
+.contact-page-section .contact-phone-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* social card: navy, to stand apart */
+.contact-page-section .contact-social-card {
+  justify-content: space-between;
+  border-color: transparent;
+  background: linear-gradient(140deg, #0b1a45 0%, #17336b 100%);
+}
+
+.contact-page-section .contact-social-card .contact-social-heading {
+  color: #ffffff;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.contact-page-section .contact-socials {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+}
+
+.contact-page-section .contact-socials .social-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+/* map: rounded card lined up with the page content */
+section.contact-map-section {
+  margin: 0 max(var(--page-gutter), calc((100% - 1240px) / 2 + var(--page-gutter))) var(--section-space);
+  overflow: hidden;
+  border: 1px solid #e3ecf1;
+  border-radius: 28px;
+  box-shadow: 0 20px 44px rgba(4, 4, 71, 0.1);
+  line-height: 0;
+}
+
+section.contact-map-section iframe {
+  display: block;
+  width: 100%;
+  height: clamp(320px, 40vw, 460px);
+  border: 0;
+}
+
+@media (max-width: 1100px) {
+  .contact-page-section .contact-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-page-section .contact-phone-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-page-section .contact-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .contact-page-section .contact-card-box {
+    flex-direction: row;
+    padding: 20px 18px;
+  }
+
+  .contact-page-section .contact-social-card {
+    flex-direction: column;
+  }
+
+  .contact-page-section .contact-phone-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  section.contact-map-section {
+    border-radius: 20px;
+  }
+
+  .contact-page-section .contact-phone-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+  }
+}
+
+/* ==========================================================================
+   Newsletter / call CTA (homepage and Articles): navy card with teal accents
+   ========================================================================== */
+section.newsletter-strip-section {
+  background: #ffffff;
+  padding: var(--section-space) 0;
+}
+
+.newsletter-strip-section .newsletter-strip-container {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 32px 48px;
+  width: auto;
+  max-width: calc(1240px - 2 * var(--page-gutter));
+  margin-inline: max(var(--page-gutter), calc((100% - 1240px) / 2 + var(--page-gutter)));
+  padding: 44px 48px;
+  border: 0;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0, 229, 204, 0.28), transparent 42%),
+    radial-gradient(circle at 100% 100%, rgba(0, 229, 204, 0.18), transparent 40%),
+    linear-gradient(120deg, #0b1a45 0%, #17336b 100%);
+  box-shadow: 0 28px 60px rgba(4, 4, 71, 0.22);
+}
+
+/* soft rings in the corner for depth */
+.newsletter-strip-section .newsletter-strip-container::after {
+  content: '';
+  position: absolute;
+  top: -90px;
+  right: -90px;
+  width: 260px;
+  height: 260px;
+  border: 40px solid rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.newsletter-strip-section .newsletter-strip-left {
+  position: relative;
+  z-index: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: 22px;
+}
+
+.newsletter-strip-section .newsletter-mail-icon {
+  width: 68px;
+  height: 68px;
+  padding: 17px;
+  border-radius: 20px;
+  background: var(--primary);
+  color: #0b1a45;
+  box-shadow: 0 12px 28px rgba(0, 229, 204, 0.35);
+}
+
+.newsletter-strip-section .newsletter-strip-left h3 {
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  line-height: 1.25;
+}
+
+.newsletter-strip-section .newsletter-strip-left p {
+  max-width: 480px;
+  color: #c8d4f0;
+  font-size: 0.98rem;
+}
+
+.newsletter-strip-section .newsletter-strip-phones {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.newsletter-strip-section .newsletter-phone-link {
+  padding: 8px 24px 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 1.15rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.newsletter-strip-section .newsletter-phone-link svg {
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #0b1a45;
+}
+
+.newsletter-strip-section .newsletter-phone-link:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #0b1a45;
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.newsletter-strip-section .newsletter-phone-link:hover svg {
+  background: #0b1a45;
+  color: var(--primary);
+}
+
+@media (max-width: 860px) {
+  .newsletter-strip-section .newsletter-strip-container {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 36px 32px;
+  }
+
+  .newsletter-strip-section .newsletter-strip-phones {
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .newsletter-strip-section .newsletter-strip-container {
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+
+  .newsletter-strip-section .newsletter-strip-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .newsletter-strip-section .newsletter-mail-icon {
+    width: 56px;
+    height: 56px;
+    padding: 14px;
+  }
+
+  .newsletter-strip-section .newsletter-strip-phones {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .newsletter-strip-section .newsletter-phone-link {
+    font-size: 1.05rem;
+  }
+}
+
+/* Newsletter card: light version, so it stands apart from the navy footer below */
+.newsletter-strip-section .newsletter-strip-container {
+  border: 1px solid #d6efe9;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0, 229, 204, 0.22), transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(0, 229, 204, 0.14), transparent 40%),
+    linear-gradient(120deg, #f2fcfa 0%, #e6f7f4 100%);
+  box-shadow: 0 20px 44px rgba(4, 4, 71, 0.08);
+}
+
+.newsletter-strip-section .newsletter-strip-container::after {
+  border-color: rgba(0, 179, 158, 0.07);
+}
+
+.newsletter-strip-section .newsletter-mail-icon {
+  box-shadow: 0 10px 24px rgba(0, 229, 204, 0.3);
+}
+
+.newsletter-strip-section .newsletter-strip-left h3 {
+  color: var(--navy-deep);
+}
+
+.newsletter-strip-section .newsletter-strip-left p {
+  color: var(--text-muted);
+}
+
+.newsletter-strip-section .newsletter-phone-link {
+  border-color: #d6efe9;
+  background: #ffffff;
+  color: var(--navy-deep);
+  box-shadow: 0 6px 16px rgba(4, 4, 71, 0.06);
+}
+
+.newsletter-strip-section .newsletter-phone-link:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--navy-deep);
+}
+
+/* Footer bottom bar: copyright on the left, legal links on the right */
+.footer--exact .footer-bottom-container.footer-bottom-centered {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  text-align: left;
+}
+
+.footer--exact .footer-bottom-container p {
+  margin: 0;
+}
+
+.footer--exact .footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 22px;
+}
+
+.footer--exact .footer-legal-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: #b6c3e4;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer--exact .footer-legal-links a:hover,
+.footer--exact .footer-legal-links a[aria-current="page"] {
+  color: var(--primary);
+}
+
+@media (max-width: 640px) {
+  .footer--exact .footer-bottom-container.footer-bottom-centered {
+    flex-direction: column-reverse;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer--exact .footer-legal-links {
+    justify-content: center;
+    gap: 0 18px;
+  }
+
+  .footer--exact .footer-legal-links a {
+    min-height: 40px;
+  }
+}
+
+/* keep the last legal link clear of the floating WhatsApp / back-to-top buttons */
+@media (min-width: 641px) {
+  .footer--exact .footer-bottom-container.footer-bottom-centered {
+    padding-right: max(var(--page-gutter), 96px);
+  }
+}
+
+/* Floating buttons: two matching round buttons, same size, stacked on one centre line */
+.floating-actions-wrap {
+  align-items: center;
+  gap: 12px;
+}
+
+.floating-actions-wrap > .back-to-top,
+.floating-actions-wrap .clinic-whatsapp > summary {
+  box-sizing: border-box;
+  width: 54px;
+  height: 54px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  align-self: center;
+  opacity: 1;
+  box-shadow: 0 10px 24px rgba(4, 4, 71, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-actions-wrap > .back-to-top {
+  background: var(--navy-deep);
+  color: #ffffff;
+}
+
+.floating-actions-wrap > .back-to-top svg {
+  width: 22px;
+  height: 22px;
+}
+
+.floating-actions-wrap .clinic-whatsapp > summary {
+  background: #25d366;
+}
+
+.floating-actions-wrap .clinic-whatsapp > summary svg {
+  width: 28px;
+  height: 28px;
+}
+
+.floating-actions-wrap > .back-to-top:hover,
+.floating-actions-wrap .clinic-whatsapp > summary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(4, 4, 71, 0.28);
+}
+
+@media (max-width: 640px) {
+  .floating-actions-wrap > .back-to-top,
+  .floating-actions-wrap .clinic-whatsapp > summary {
+    width: 48px;
+    height: 48px;
+  }
+
+  .floating-actions-wrap .clinic-whatsapp > summary svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* ==========================================================================
+   Sitewide mobile pass (all pages)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* iPhone/iPad Safari zooms into any form field under 16px */
+  :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]) {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* small standalone links get a 44px tap area */
+  .read-more,
+  .services-watch-video-link,
+  a[href*="replytocom"] {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* links inside running text (phone numbers, legal cross-links) get taller hit areas without breaking the line */
+  main p a[href],
+  main li a[href] {
+    display: inline-block;
+    padding-block: 10px;
+    margin-block: -10px;
+  }
+
+  /* checkboxes (comment consent etc.) were 16px */
+  main input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  /* comment form submit stays a comfortable size */
+  main :is(input[type="submit"], button[type="submit"]) {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  /* long words / URLs never push the layout sideways */
+  main :is(p, li, h1, h2, h3, h4, a) {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 767px) {
+  main .comment-form .comment-form-cookies-consent input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+  }
+
+  /* phone numbers used as headings (e.g. the About Us call widget) */
+  main :is(h2, h3, h4) a[href^="tel:"] {
+    display: inline-block;
+    padding-block: 8px;
+    margin-block: -8px;
+  }
 }
